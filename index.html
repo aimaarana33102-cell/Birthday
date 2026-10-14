@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Ayesha! 🎂💗</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 50%, #e0f2fe 100%);
+            color: #4a3547;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .font-handwriting {
+            font-family: 'Dancing Script', cursive;
+        }
+        .font-serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-20px) rotate(5deg); opacity: 1; }
+            100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+        }
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 40px -15px rgba(236, 72, 153, 0.15);
+        }
+        .glass-modal {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 25px 50px -12px rgba(219, 39, 119, 0.25);
+        }
+        .screen {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .hidden-screen {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+        }
+        .active-screen {
+            opacity: 1;
+            transform: scale(1);
+            position: relative;
+            height: auto;
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        .gift-box:hover {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+        @keyframes flicker {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.85); opacity: 0.8; filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.8)); }
+        }
+        .candle-flame {
+            animation: flicker 1s infinite ease-in-out;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(236, 72, 153, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.8); }
+        }
+        .glow-btn {
+            animation: pulse-glow 2s infinite;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col items-center justify-between p-4 sm:p-6 select-none">
+
+    <!-- Floating Background Decors -->
+    <div class="floating-element text-3xl sm:text-4xl top-10 left-6" style="animation-delay: 0s;">💗</div>
+    <div class="floating-element text-2xl sm:text-3xl top-24 right-10" style="animation-delay: 1.5s;">✨</div>
+    <div class="floating-element text-3xl sm:text-4xl bottom-12 left-10" style="animation-delay: 3s;">🎈</div>
+    <div class="floating-element text-2xl sm:text-3xl bottom-20 right-12" style="animation-delay: 2s;">⭐</div>
+    <div class="floating-element text-3xl sm:text-4xl top-1/2 left-4" style="animation-delay: 4s;">🌸</div>
+    <div class="floating-element text-3xl sm:text-4xl top-1/3 right-6" style="animation-delay: 2.5s;">💜</div>
+
+    <!-- Music Control Bar -->
+    <div class="w-full max-w-md flex justify-between items-center mb-2 z-20">
+        <div class="flex items-center space-x-2 bg-white/70 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm border border-pink-100">
+            <span class="text-xs font-semibold text-pink-600 tracking-wider">BIRTHDAY JOURNEY</span>
+        </div>
+        <button id="musicToggleBtn" onclick="toggleMusic()" class="flex items-center space-x-2 bg-white/80 hover:bg-white backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm border border-pink-200 text-pink-600 transition-all duration-300 text-xs font-medium cursor-pointer">
+            <span id="musicIcon">🔇</span>
+            <span id="musicText">Play Music</span>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-md mx-auto flex flex-col items-center justify-center flex-grow z-10 my-auto">
+
+        <!-- SCREEN 1: WELCOME SCREEN -->
+        <div id="screen-welcome" class="screen active-screen w-full flex flex-col items-center text-center p-6 glass-card rounded-3xl my-4">
+            <div class="w-20 h-20 bg-gradient-to-tr from-pink-400 to-purple-400 rounded-full flex items-center justify-center text-3xl shadow-lg mb-6 text-white animate-bounce">
+                🎂
+            </div>
+            <h1 class="font-serif-title text-2xl sm:text-3xl font-bold text-gray-800 mb-3 leading-snug">
+                Hey! Someone has a little surprise for you... 💗
+            </h1>
+            <p class="text-sm text-gray-600 mb-8 max-w-xs">
+                A special moment made just for you. Take a deep breath and open your heart! ✨
+            </p>
+            <button onclick="startJourney()" class="w-full py-4 px-8 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-semibold rounded-2xl shadow-xl glow-btn transition-all duration-300 transform active:scale-95 cursor-pointer text-base">
+                Open Your Surprise ✨
+            </button>
+        </div>
+
+        <!-- SCREEN 2: MAIN MENU & BIRTHDAY CARD -->
+        <div id="screen-menu" class="screen hidden-screen w-full flex flex-col items-center">
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-white/60 backdrop-blur-sm rounded-full h-2 mb-4 p-0.5 border border-pink-100">
+                <div id="progressBar" class="bg-gradient-to-r from-pink-500 to-purple-500 h-1 rounded-full transition-all duration-500" style="width: 20%;"></div>
+            </div>
+
+            <!-- Birthday Card Header -->
+            <div class="w-full glass-card p-6 rounded-3xl text-center mb-5 relative">
+                <button onclick="goHome()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-pink-100 hover:bg-pink-200 flex items-center justify-center text-pink-600 transition-colors cursor-pointer shadow-sm" title="Return to Menu">
+                    💗
+                </button>
+                <div class="text-3xl mb-2">🎂💗</div>
+                <h2 class="font-serif-title text-2xl font-bold text-gray-800 mb-1">
+                    Happy Birthday, Ayesha 🎂💗
+                </h2>
+                <p class="text-xs text-pink-600 font-medium">Explore each card below to discover your surprise!</p>
+            </div>
+
+            <!-- Interactive Cards Menu -->
+            <div class="w-full space-y-3.5">
+                <button onclick="openSection('wish')" class="w-full glass-card p-4 rounded-2xl flex items-center justify-between hover:bg-white/95 transition-all duration-300 transform hover:scale-[1.02] shadow-sm group cursor-pointer border border-pink-100">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-pink-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💌</div>
+                        <div class="text-left">
+                            <h3 class="font-semibold text-gray-800 text-sm">1. A Special Wish</h3>
+                            <p class="text-xs text-gray-500">A heartfelt letter just for you</p>
+                        </div>
+                    </div>
+                    <span class="text-pink-400 group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+
+                <button onclick="openSection('memories')" class="w-full glass-card p-4 rounded-2xl flex items-center justify-between hover:bg-white/95 transition-all duration-300 transform hover:scale-[1.02] shadow-sm group cursor-pointer border border-purple-100">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-purple-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">📸</div>
+                        <div class="text-left">
+                            <h3 class="font-semibold text-gray-800 text-sm">2. Our Memories</h3>
+                            <p class="text-xs text-gray-500">A photo gallery of wonderful moments</p>
+                        </div>
+                    </div>
+                    <span class="text-purple-400 group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+
+                <button onclick="openSection('surprise')" class="w-full glass-card p-4 rounded-2xl flex items-center justify-between hover:bg-white/95 transition-all duration-300 transform hover:scale-[1.02] shadow-sm group cursor-pointer border border-pink-100">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-pink-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🎁</div>
+                        <div class="text-left">
+                            <h3 class="font-semibold text-gray-800 text-sm">3. Your Surprise</h3>
+                            <p class="text-xs text-gray-500">Unwrap a special little gift</p>
+                        </div>
+                    </div>
+                    <span class="text-pink-400 group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+
+                <button onclick="openSection('message')" class="w-full glass-card p-4 rounded-2xl flex items-center justify-between hover:bg-white/95 transition-all duration-300 transform hover:scale-[1.02] shadow-sm group cursor-pointer border border-blue-100">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💖</div>
+                        <div class="text-left">
+                            <h3 class="font-semibold text-gray-800 text-sm">4. A Little Message</h3>
+                            <p class="text-xs text-gray-500">A handwritten note from the heart</p>
+                        </div>
+                    </div>
+                    <span class="text-blue-400 group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+
+                <button onclick="openSection('cake')" class="w-full glass-card p-4 rounded-2xl flex items-center justify-between hover:bg-white/95 transition-all duration-300 transform hover:scale-[1.02] shadow-sm group cursor-pointer border border-yellow-100">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-yellow-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">✨</div>
+                        <div class="text-left">
+                            <h3 class="font-semibold text-gray-800 text-sm">5. Make a Wish</h3>
+                            <p class="text-xs text-gray-500">Blow out the candles on your cake</p>
+                        </div>
+                    </div>
+                    <span class="text-yellow-500 group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- SECTION MODALS -->
+
+        <!-- 1. A SPECIAL WISH MODAL -->
+        <div id="modal-wish" class="screen hidden-screen w-full flex flex-col items-center">
+            <div class="w-full glass-modal p-6 sm:p-8 rounded-3xl relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors cursor-pointer">✕</button>
+                <div class="text-center mb-4">
+                    <span class="text-2xl">💌</span>
+                    <h3 class="font-serif-title text-xl font-bold text-gray-800 mt-1">A Special Wish</h3>
+                </div>
+                <div id="typingTextContainer" class="bg-pink-50/50 p-5 rounded-2xl border border-pink-100 mb-6 min-h-[160px] text-gray-700 text-sm leading-relaxed whitespace-pre-line font-medium">
+                    <!-- Typed text appears here -->
+                </div>
+                <button onclick="closeModal()" class="w-full py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-xl shadow-md hover:opacity-95 transition-all cursor-pointer text-sm">
+                    Close & Return 💗
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. OUR MEMORIES MODAL -->
+        <div id="modal-memories" class="screen hidden-screen w-full flex flex-col items-center">
+            <div class="w-full glass-modal p-5 sm:p-6 rounded-3xl relative max-h-[85vh] flex flex-col">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl">📸</span>
+                        <h3 class="font-serif-title text-lg font-bold text-gray-800">Our Memories</h3>
+                    </div>
+                    <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors cursor-pointer">✕</button>
+                </div>
+                
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-2 gap-3 overflow-y-auto pr-1 flex-grow" style="max-height: 60vh;">
+                    <!-- Memory 1 -->
+                    <div onclick="openLightbox('./img1.jpeg', './img1.jpeg')" class="group relative rounded-2xl overflow-hidden shadow-md cursor-pointer bg-white aspect-square border border-purple-100">
+                        <img src="./img1.jpeg" alt="Memory 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-90 flex items-end p-2.5">
+                            <p class="text-white text-xs font-medium">./img1.jpeg</p>
+                        </div>
+                    </div>
+                    <!-- Memory 2 -->
+                    <div onclick="openLightbox('./img2.jpeg', './img2.jpeg')" class="group relative rounded-2xl overflow-hidden shadow-md cursor-pointer bg-white aspect-square border border-purple-100">
+                        <img src="./img2.jpeg" alt="Memory 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-90 flex items-end p-2.5">
+                            <p class="text-white text-xs font-medium">./img2.jpeg</p>
+                        </div>
+                    </div>
+                    <!-- Memory 3 -->
+                    <div onclick="openLightbox('./img3.jpeg', './img3.jpeg')" class="group relative rounded-2xl overflow-hidden shadow-md cursor-pointer bg-white aspect-square border border-purple-100">
+                        <img src="./img3.jpeg" alt="Memory 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-90 flex items-end p-2.5">
+                            <p class="text-white text-xs font-medium">./img3.jpeg</p>
+                        </div>
+                    </div>
+                    <!-- Memory 4 -->
+                    <div onclick="openLightbox('./img4.jpeg', './img4.jpeg')" class="group relative rounded-2xl overflow-hidden shadow-md cursor-pointer bg-white aspect-square border border-purple-100">
+                        <img src="./img4.jpeg" alt="Memory 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-90 flex items-end p-2.5">
+                            <p class="text-white text-xs font-medium">./img4.jpeg</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="closeModal()" class="w-full mt-4 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-xl shadow-md hover:opacity-95 transition-all cursor-pointer text-sm">
+                    Back to Menu 💕
+                </button>
+            </div>
+        </div>
+
+        <!-- LIGHTBOX MODAL -->
+        <div id="lightboxModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex flex-col items-center justify-center p-4">
+            <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-2xl bg-white/20 hover:bg-white/40 w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer">✕</button>
+            <img id="lightboxImg" src="" alt="Enlarged Memory" class="max-w-full max-h-[70vh] rounded-2xl shadow-2xl object-contain mb-4 border border-white/20">
+            <p id="lightboxCaption" class="text-white text-base font-medium text-center px-4 bg-black/40 py-2 rounded-xl backdrop-blur-sm"></p>
+        </div>
+
+        <!-- 3. YOUR SURPRISE MODAL -->
+        <div id="modal-surprise" class="screen hidden-screen w-full flex flex-col items-center">
+            <div class="w-full glass-modal p-6 sm:p-8 rounded-3xl text-center relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors cursor-pointer">✕</button>
+                <div class="mb-2">
+                    <span class="text-3xl">🎁</span>
+                    <h3 class="font-serif-title text-xl font-bold text-gray-800 mt-1">Your Surprise</h3>
+                </div>
+                
+                <div id="giftBoxContainer" class="my-6 flex flex-col items-center cursor-pointer gift-box py-4" onclick="openGiftBox()">
+                    <div class="text-6xl sm:text-7xl mb-3 animate-bounce">🎁</div>
+                    <p class="text-sm font-semibold text-pink-600 bg-pink-50 px-4 py-2 rounded-full border border-pink-100 shadow-sm">
+                        There's something waiting for you... Tap to open! 🎀
+                    </p>
+                </div>
+
+                <div id="giftMessageContainer" class="hidden my-4 bg-gradient-to-tr from-pink-50 to-purple-50 p-6 rounded-2xl border border-pink-200 shadow-inner">
+                    <div class="text-3xl mb-2">🎉💖</div>
+                    <h4 class="font-serif-title text-lg font-bold text-gray-800 mb-2">Surprise! 🎉</h4>
+                    <p class="text-sm text-gray-700 leading-relaxed font-medium">
+                        You deserve all the happiness in the world. Keep smiling and keep being amazing! 💗
+                    </p>
+                </div>
+
+                <button onclick="closeModal()" class="w-full mt-2 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-xl shadow-md hover:opacity-95 transition-all cursor-pointer text-sm">
+                    Back to Menu ✨
+                </button>
+            </div>
+        </div>
+
+        <!-- 4. A LITTLE MESSAGE MODAL -->
+        <div id="modal-message" class="screen hidden-screen w-full flex flex-col items-center">
+            <div class="w-full glass-modal p-6 sm:p-8 rounded-3xl relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors cursor-pointer">✕</button>
+                
+                <div class="text-center mb-3">
+                    <span class="text-2xl">💖</span>
+                    <h3 class="font-serif-title text-xl font-bold text-gray-800 mt-1">A Little Note</h3>
+                </div>
+
+                <!-- Handwritten Style Letter Card -->
+                <div class="bg-[#fffdf9] p-6 rounded-2xl border border-amber-200/60 shadow-sm my-4 relative overflow-hidden">
+                    <div class="absolute -top-3 -right-3 text-amber-200 text-4xl select-none opacity-50">📌</div>
+                    <p class="font-handwriting text-xl text-gray-800 leading-relaxed mb-3">
+                        "Dear Ayesha, <br><br>
+                        Having you as a friend is one of the greatest blessings. You bring so much positivity and warmth wherever you go..."
+                    </p>
+                    <div id="extendedMessage" class="hidden font-handwriting text-xl text-gray-800 leading-relaxed transition-all duration-500">
+                        Your kindness, beautiful laughter, and caring nature make the world a much brighter place. Never change who you are because you are truly special to everyone around you. Wishing you endless joy today and always! ✨
+                    </div>
+                </div>
+
+                <button id="readMoreBtn" onclick="toggleReadMore()" class="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl shadow-md transition-all cursor-pointer text-sm mb-3">
+                    Read More 💌
+                </button>
+
+                <button onclick="closeModal()" class="w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all cursor-pointer text-sm">
+                    Back to Menu 🤍
+                </button>
+            </div>
+        </div>
+
+        <!-- 5. MAKE A WISH MODAL -->
+        <div id="modal-cake" class="screen hidden-screen w-full flex flex-col items-center">
+            <div class="w-full glass-modal p-6 sm:p-8 rounded-3xl text-center relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors cursor-pointer">✕</button>
+                
+                <div class="mb-2">
+                    <span class="text-2xl">🕯️</span>
+                    <h3 class="font-serif-title text-xl font-bold text-gray-800 mt-1">Make a Wish</h3>
+                </div>
+                <p id="cakeInstruction" class="text-xs text-gray-600 mb-4">Close your eyes, make a wish... Tap the candles to blow them out! 🕯️✨</p>
+
+                <!-- Interactive Birthday Cake -->
+                <div class="my-6 flex flex-col items-center relative py-4 bg-pink-50/60 rounded-2xl border border-pink-100 cursor-pointer" onclick="blowCandles()">
+                    <div class="flex space-x-3 mb-1">
+                        <div class="flex flex-col items-center">
+                            <span id="flame1" class="text-xl candle-flame">🔥</span>
+                            <div class="w-2 h-8 bg-amber-200 rounded-sm"></div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span id="flame2" class="text-xl candle-flame" style="animation-delay: 0.3s;">🔥</span>
+                            <div class="w-2 h-8 bg-amber-200 rounded-sm"></div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span id="flame3" class="text-xl candle-flame" style="animation-delay: 0.6s;">🔥</span>
+                            <div class="w-2 h-8 bg-amber-200 rounded-sm"></div>
+                        </div>
+                    </div>
+                    <!-- Cake Body -->
+                    <div class="w-40 h-16 bg-gradient-to-r from-pink-300 via-purple-300 to-pink-300 rounded-t-2xl shadow-md relative flex items-center justify-center">
+                        <div class="absolute top-0 w-full h-4 bg-white rounded-t-2xl opacity-80"></div>
+                        <span class="text-xs font-bold text-purple-900 z-10 tracking-widest">HBD AYESHA</span>
+                    </div>
+                    <div class="w-48 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-b-xl shadow-md"></div>
+                </div>
+
+                <div id="wishResultContainer" class="hidden mb-4">
+                    <p class="text-sm font-bold text-pink-600 bg-pink-100/80 px-4 py-2.5 rounded-xl border border-pink-200 shadow-sm animate-pulse mb-4">
+                        May your wish come true! 💖✨
+                    </p>
+                    <button onclick="openFinalScreen()" class="w-full py-3.5 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-semibold rounded-xl shadow-lg glow-btn transition-all cursor-pointer text-sm">
+                        One Last Surprise 🎁
+                    </button>
+                </div>
+
+                <button id="cakeBackBtn" onclick="closeModal()" class="w-full py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all cursor-pointer text-xs">
+                    Back to Menu 🤍
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: FINAL SURPRISE SCREEN -->
+        <div id="screen-final" class="screen hidden-screen w-full flex flex-col items-center text-center p-6 glass-card rounded-3xl my-4 relative overflow-hidden">
+            <div class="text-4xl mb-3 animate-bounce">🎉🎂💗</div>
+            <h2 class="font-serif-title text-2xl sm:text-3xl font-bold text-gray-800 mb-3">
+                Happy Birthday, Ayesha! 🎂💗
+            </h2>
+            <p class="text-sm text-gray-700 leading-relaxed mb-6 bg-white/70 p-4 rounded-2xl border border-pink-100 shadow-sm">
+                Today is your day, so smile a little extra, laugh a little louder and make some beautiful memories. ✨
+            </p>
+            <div class="text-3xl mb-6 space-x-2">
+                <span>🎈</span><span>⭐</span><span>💖</span><span>🌸</span><span>✨</span>
+            </div>
+            <button onclick="restartJourney()" class="w-full py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-semibold rounded-2xl shadow-xl glow-btn transition-all cursor-pointer text-base">
+                Replay the Surprise 🔄
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-2 text-xs text-gray-500 z-10">
+        Made with 💗 for Ayesha
+    </footer>
+
+    <!-- JavaScript Sound & Logic -->
+    <script>
+        const CONFIG = {
+            friendName: "Ayesha",
+            specialWishText: "Happy Birthday to one of the most special people in my life! 💗\n\nI hope this new year of your life brings you countless reasons to smile, beautiful memories, success, happiness and everything your heart wishes for.\n\nThank you for being such an amazing friend. Some people enter our lives and simply make everything a little brighter — you are one of those people.\n\nMay your day be as beautiful and special as you are. ✨\n\nHappy Birthday once again! 🎂💖"
+        };
+
+        let exploredSections = new Set();
+
+        function updateProgress() {
+            let progress = Math.min(100, 20 + (exploredSections.size * 16));
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showScreen(screenId) {
+            const screens = ['screen-welcome', 'screen-menu', 'modal-wish', 'modal-memories', 'modal-surprise', 'modal-message', 'modal-cake', 'screen-final'];
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === screenId) {
+                    el.classList.remove('hidden-screen');
+                    el.classList.add('active-screen');
+                } else {
+                    el.classList.add('hidden-screen');
+                    el.classList.remove('active-screen');
+                }
+            });
+        }
+
+        function startJourney() {
+            showScreen('screen-menu');
+            playMusic();
+        }
+
+        function goHome() {
+            showScreen('screen-menu');
+        }
+
+        function openSection(sectionName) {
+            exploredSections.add(sectionName);
+            updateProgress();
+            if (sectionName === 'wish') {
+                showScreen('modal-wish');
+                startTypingAnimation();
+            } else if (sectionName === 'memories') {
+                showScreen('modal-memories');
+            } else if (sectionName === 'surprise') {
+                showScreen('modal-surprise');
+            } else if (sectionName === 'message') {
+                showScreen('modal-message');
+            } else if (sectionName === 'cake') {
+                showScreen('modal-cake');
+            }
+        }
+
+        function closeModal() {
+            showScreen('screen-menu');
+        }
+
+        let typingStarted = false;
+        function startTypingAnimation() {
+            const container = document.getElementById('typingTextContainer');
+            container.innerHTML = '';
+            const text = CONFIG.specialWishText.replace(/\\n/g, '\n');
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    if (text.substring(i, i+2) === '\\n' || text.substring(i, i+2) === '\n') {
+                        container.innerHTML += '<br>';
+                        i += 2;
+                    } else {
+                        container.innerHTML += text.charAt(i);
+                        i++;
+                    }
+                    setTimeout(type, 25);
+                }
+            }
+            type();
+        }
+
+        function openLightbox(imgSrc, captionText) {
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightboxCaption').innerText = captionText;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        function openGiftBox() {
+            document.getElementById('giftBoxContainer').style.display = 'none';
+            document.getElementById('giftMessageContainer').classList.remove('hidden');
+        }
+
+        function toggleReadMore() {
+            const extMsg = document.getElementById('extendedMessage');
+            const btn = document.getElementById('readMoreBtn');
+            if (extMsg.classList.contains('hidden')) {
+                extMsg.classList.remove('hidden');
+                btn.innerText = 'Show Less 💌';
+            } else {
+                extMsg.classList.add('hidden');
+                btn.innerText = 'Read More 💌';
+            }
+        }
+
+        let candlesBlown = false;
+        function blowCandles() {
+            if (candlesBlown) return;
+            candlesBlown = true;
+            document.getElementById('flame1').innerText = '💨';
+            document.getElementById('flame2').innerText = '💨';
+            document.getElementById('flame3').innerText = '💨';
+            document.getElementById('cakeInstruction').innerText = 'Candles blown out successfully! 🎉';
+            setTimeout(() => {
+                document.getElementById('flame1').style.display = 'none';
+                document.getElementById('flame2').style.display = 'none';
+                document.getElementById('flame3').style.display = 'none';
+                document.getElementById('wishResultContainer').classList.remove('hidden');
+                document.getElementById('cakeBackBtn').style.display = 'none';
+            }, 800);
+        }
+
+        function openFinalScreen() {
+            showScreen('screen-final');
+        }
+
+        function restartJourney() {
+            exploredSections.clear();
+            updateProgress();
+            candlesBlown = false;
+            document.getElementById('giftBoxContainer').style.display = 'flex';
+            document.getElementById('giftMessageContainer').classList.add('hidden');
+            document.getElementById('extendedMessage').classList.add('hidden');
+            document.getElementById('readMoreBtn').innerText = 'Read More 💌';
+            document.getElementById('flame1').style.display = 'inline';
+            document.getElementById('flame2').style.display = 'inline';
+            document.getElementById('flame3').style.display = 'inline';
+            document.getElementById('flame1').innerText = '🔥';
+            document.getElementById('flame2').innerText = '🔥';
+            document.getElementById('flame3').innerText = '🔥';
+            document.getElementById('wishResultContainer').classList.add('hidden');
+            document.getElementById('cakeBackBtn').style.display = 'block';
+            document.getElementById('cakeInstruction').innerText = 'Close your eyes, make a wish... Tap the candles to blow them out! 🕯️✨';
+            showScreen('screen-welcome');
+        }
+
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyInterval = null;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                stopMusic();
+            } else {
+                playMusic();
+            }
+        }
+
+        function playMusic() {
+            if (isPlaying) return;
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                isPlaying = true;
+                document.getElementById('musicIcon').innerText = '🎵';
+                document.getElementById('musicText').innerText = 'Music On';
+
+                const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
+
+                function playTone() {
+                    if (!isPlaying) return;
+                    try {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.value = notes[Math.floor(Math.random() * notes.length)];
+
+                        gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.5);
+
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+
+                        osc.start();
+                        osc.stop(audioCtx.currentTime + 2.5);
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
+
+                playTone();
+                melodyInterval = setInterval(playTone, 1500);
+            } catch (e) {
+                console.log("Audio not allowed yet");
+            }
+        }
+
+        function stopMusic() {
+            isPlaying = false;
+            if (melodyInterval) clearInterval(melodyInterval);
+            if (audioCtx) {
+                audioCtx.close();
+                audioCtx = null;
+            }
+            document.getElementById('musicIcon').innerText = '🔇';
+            document.encodeText = '';
+            document.getElementById('musicText').innerText = 'Play Music';
+        }
+    </script>
+</body>
+</html>
